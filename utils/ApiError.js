@@ -1,18 +1,19 @@
 class ApiError extends Error {
-    constructor(statusCode, message = "Internal Server Error", errors = [],stack = "") {
-        super(message);
-        this.statusCode = statusCode;
-        this.message = message;
-        this.data=null;
-        this.error = errors;
-    
-        this.success = false;
-         if(stack){
-            this.stack = stack;
-        } else{
-            this.Error.captureStackTrace(this, this.constructor);
+    constructor(statusCode, message = "Something went wrong", errors = [], stack = "") {
+      super(message);
+      this.statusCode = statusCode;
+      this.data = null;
+      this.success = false;
+      this.errors = errors;
+  
+      if (stack) {
+        this.stack = stack;
+      } else {
+        // ✅ Make sure `Error` is not being overwritten and exists
+        if (typeof Error.captureStackTrace === "function") {
+          Error.captureStackTrace(this, this.constructor);
         }
-
+      }
     }
-}
-export { ApiError };
+  }
+  export { ApiError };

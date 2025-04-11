@@ -1,2 +1,1 @@
-const DB_NAME=Crypto
-export {DB_NAME}
+export const DB_NAME=Crypto
